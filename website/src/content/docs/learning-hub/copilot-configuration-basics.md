@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-17
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -941,6 +941,14 @@ copilot skill enable my-skill    # enable a specific skill
 ### Memory and Session Import
 
 *(v1.0.84+)* New session and memory import commands accept the semantic JSONL interchange format, making it possible to bring saved session history or memory entries into Copilot CLI from an external export rather than starting from scratch.
+
+### Concise Transcript View
+
+*(v1.0.85+)* Set `transcriptView` to `"concise"` in `/settings` (or `config.json`) to group settled tool activity into expandable work summaries instead of showing every tool call inline. This keeps the conversation transcript shorter and easier to scan for long agentic sessions, while still letting you expand a summary to see the underlying tool calls when you need the detail.
+
+### Context Management Tools for Agents and Subagents
+
+*(v1.0.85+)* `/settings` now includes an opt-in for **context management tools** that agents and subagents can use to actively manage their own context window — for example, summarizing or discarding stale history mid-task rather than relying solely on automatic compaction. This is disabled by default; enable it from `/settings` if you want agents to have more direct control over what stays in context during long-running work.
 
 ### Command-Line Parsing Rewrite
 
