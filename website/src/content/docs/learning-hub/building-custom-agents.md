@@ -108,6 +108,19 @@ tools: ['codebase', 'terminal', 'github']
 
 For MCP server tools, reference them by server name (e.g., `postgres`, `docker`). See [Understanding MCP Servers](../understanding-mcp-servers/) for details.
 
+**include-custom-instructions** *(v1.0.86+)*: By default, a custom agent only follows the guidance in its own frontmatter and Markdown instructions — repository-level instruction files are **not** merged in automatically. Set `include-custom-instructions: true` to have the agent also pick up repository instruction files (`AGENTS.md`, `copilot-instructions.md`, `CLAUDE.md`) the same way the default agent does:
+
+```yaml
+---
+name: 'Security Reviewer'
+description: 'Expert security auditor'
+include-custom-instructions: true
+tools: ['codebase', 'terminal', 'github']
+---
+```
+
+Use this when a specialized agent should still respect your team's shared conventions defined at the repository level; leave it unset when you want the agent's behavior isolated from repository-wide instructions.
+
 ### Agent Instructions
 
 After the frontmatter, write Markdown instructions that define the agent's behavior. Structure these clearly:

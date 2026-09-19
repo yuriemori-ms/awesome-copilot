@@ -946,6 +946,32 @@ copilot skill enable my-skill    # enable a specific skill
 
 *(v1.0.84+)* Command-line parsing moved from Commander to a Rust-based grammar that mirrors what the CLI actually parses, which also generates shell completions directly from that grammar — so `copilot <TAB>` now offers root flags alongside subcommands, and each subcommand only shows its own options. As a result of this change, some error and help wording changed, `copilot login --host` now works correctly, and `--max-autopilot-continues` no longer accepts scientific notation as a value.
 
+### Context Management Tools for Agents and Subagents
+
+*(v1.0.85+)* Opt in from `/settings` to give agents and subagents access to dedicated context management tools, letting them actively manage their own context window (for example, summarizing or discarding stale history) instead of relying solely on automatic compaction:
+
+```
+/settings context-management
+```
+
+### Concise Transcript View
+
+*(v1.0.85+)* Set `transcriptView` to `"concise"` in your settings to group tool activity into expandable work summaries instead of showing every tool call inline. This keeps the timeline readable during long, tool-heavy turns while still letting you expand a summary to see the underlying steps.
+
+### Repository Instructions Opt-In for Custom Agents
+
+*(v1.0.86+)* By default, a custom agent's frontmatter and instructions are the only guidance it receives — repository-level instruction files are not automatically merged in. Set `include-custom-instructions: true` in a custom agent's frontmatter to have it also pick up repository instruction files (`AGENTS.md`, `copilot-instructions.md`, `CLAUDE.md`) the same way the default agent does:
+
+```yaml
+---
+name: 'Security Reviewer'
+description: 'Expert security auditor'
+include-custom-instructions: true
+---
+```
+
+Use this when a specialized agent should still follow your team's shared conventions, and omit it when you want the agent's behavior fully isolated from repository-wide instructions.
+
 ## Common Questions
 
 **Q: How do I disable Copilot for specific files?**
