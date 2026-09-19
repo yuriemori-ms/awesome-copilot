@@ -239,6 +239,14 @@ copilot plugin uninstall my-plugin
 
 > **Component-specific commands (v1.0.84+)**: Individual component kinds now have their own dedicated CLI commands instead of relying on cross-kind flags on `copilot plugins`. Use `copilot instruction list` and `copilot lsp list` to inspect loaded instructions and LSP servers, and use `enable`/`disable` directly on `copilot plugin`, `copilot mcp`, and `copilot skill` (for example, `copilot skill disable my-skill`) instead of the removed `copilot plugins enable/disable --plugin|--mcp|--skill` flags. Installing a standalone skill now uses `copilot skill add [--project]` in place of the retired `copilot plugins install --skill [--scope project]`.
 
+> **`--json` output (v1.0.85+)**: `copilot plugin list`, `copilot plugin marketplace list`, and `copilot plugin marketplace browse` all accept a `--json` flag for machine-readable output, useful for scripting plugin inventory checks in CI or setup automation:
+>
+> ```bash
+> copilot plugin list --json
+> copilot plugin marketplace list --json
+> copilot plugin marketplace browse awesome-copilot --json
+> ```
+
 ### Enabling and Disabling Plugin Components
 
 > **Breaking change (v1.0.81+)**: The `/plugins` command has been **removed**. Its functionality moved to dedicated commands: `/plugin` (plugin dashboard), `/mcp` (MCP servers), and `/skills` (skills), with `/subagents` for custom agents and `/instructions` for instructions.
