@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-20
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -387,6 +387,8 @@ Settings file: `.vscode/settings.json` or global user settings
   "editor.inlineSuggest.enabled": true
 }
 ```
+
+> **Tuning the Auto model (VS Code 1.139+)**: The model picker's **Auto** entry now has an **Optimize for** control with **Efficiency**, **Balance**, and **Intelligence** options, letting you bias Auto's server-side routing toward speed/cost or toward raw capability for both Copilot Chat and Copilot SDK agent sessions. The model picker also gained controls for a model's **Thinking Effort** and, when the model offers it, a longer **Context Size** — the editor equivalent of the CLI's `reasoningEffort` and context-management settings.
 
 ### Visual Studio
 
@@ -923,6 +925,14 @@ copilot plugin enable my-plugin  # enable a specific plugin
 copilot mcp disable my-server    # disable a specific MCP server
 copilot skill enable my-skill    # enable a specific skill
 ```
+
+> **Machine-readable output (v1.0.85+)**: Add `--json` to `copilot plugin list`, `copilot plugin marketplace list`, and `copilot plugin marketplace browse` to get structured output for scripts and CI checks instead of parsing the human-readable table format.
+
+### Context Management Tools and Concise Transcripts
+
+*(v1.0.85+)* Run `/settings` to opt in to **context management tools** for agents and subagents — additional controls that help long sessions manage their own context budget instead of relying solely on automatic compaction.
+
+Set `transcriptView` to `concise` (via `/settings` or `config.json`) to group tool activity into expandable work summaries in the timeline, instead of showing every tool call inline. This keeps long agentic sessions readable while still letting you expand a summary to see the underlying tool calls when you need the detail.
 
 > **Breaking change (v1.0.84+)**: The cross-kind `--kind`, `--scope`, `--mcp`, and `--skill` flags have been removed from `copilot plugins`. `copilot plugins list` is now an alias of `copilot plugin list` and reports only plugins — not MCP servers, skills, instructions, or LSP servers. Scripts that installed skills with `copilot plugins install --skill [--scope project]` should switch to `copilot skill add [--project]`, and scripts reading `.plugins` from `copilot plugins list --json` should expect a flat array instead of the previous `{ plugins, errors }` object.
 
