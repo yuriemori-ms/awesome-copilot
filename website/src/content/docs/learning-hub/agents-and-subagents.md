@@ -138,6 +138,8 @@ That makes `/fleet` a practical way to launch subagents even if you are not auth
 
 Available in `/experimental` (v1.0.42+), the **rubber-duck agent** applies a novel multi-model pattern: when you're working in a GPT-powered session, the rubber-duck agent internally routes certain requests through Claude to provide a second perspective. The idea is similar to rubber-duck debugging — talking through a problem with a different "listener" often surfaces assumptions or blind spots you didn't notice.
 
+*(v1.0.87+)* The rubber-duck agent is now enabled for every model family, not just GPT-powered sessions, and is also available for low-cost-tier session models — so you can get a second-opinion critique regardless of which model powers your primary session.
+
 In v1.0.64+, you can configure the rubber-duck agent (including its complementary model strategy) directly from `/subagents`:
 
 ```
