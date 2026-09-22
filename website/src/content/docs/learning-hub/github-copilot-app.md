@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-22
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -126,6 +126,10 @@ Open app settings directly from the message composer with **`/settings`** *(v1.1
 *(v1.1.20+)* If two installed plugins each ship a custom agent with the same display name, the agent picker now distinguishes them by their owning plugin, so you can tell at a glance which agent you're selecting when names collide.
 
 > **Terminology note (v1.1.20+)**: The "Start from scratch" option in session creation menus and project pickers has been renamed to **"Chat"**.
+
+### Local Sandbox for Agent Shell Commands
+
+*(v1.1.23+)* A new project setting and **`/sandbox`** command let you run an agent's shell commands in a local sandbox restricted to the session's workspace, mirroring the sandboxing behavior already available in Copilot CLI (see [Copilot Configuration Basics](../copilot-configuration-basics/#sandbox-network-allowdeny-rules)). Turn it on per project to limit filesystem access to the session's own directory, giving you an extra guardrail when an agent runs commands you haven't reviewed yet.
 
 ## Who is the Copilot app for?
 
