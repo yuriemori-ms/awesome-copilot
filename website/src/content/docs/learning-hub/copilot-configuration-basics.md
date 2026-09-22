@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-22
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -945,6 +945,26 @@ copilot skill enable my-skill    # enable a specific skill
 ### Command-Line Parsing Rewrite
 
 *(v1.0.84+)* Command-line parsing moved from Commander to a Rust-based grammar that mirrors what the CLI actually parses, which also generates shell completions directly from that grammar — so `copilot <TAB>` now offers root flags alongside subcommands, and each subcommand only shows its own options. As a result of this change, some error and help wording changed, `copilot login --host` now works correctly, and `--max-autopilot-continues` no longer accepts scientific notation as a value.
+
+### Auto Routing Tier Defaults
+
+*(v1.0.87+)* Organizations can now set user and managed startup defaults for the **Auto** model-routing tier, including a strict mode and a user-overridable policy. This lets teams pin a default cost/quality tradeoff for sessions that use automatic model routing, while still allowing individual users to override it unless the organization enforces strict mode.
+
+### Custom Worktree Paths
+
+*(v1.0.87+)* A `worktreePathTemplate` setting controls where `/worktree`, `/move`, `/new`, and `--worktree` create new worktrees. Set it to a path template like `~/src/worktrees/{repo}/{branch}` — supported placeholders are `{repoPath}`, `{repo}`, `{branch}`, and `{branchSlug}`. Leaving it unset keeps the existing default layout (`<repo>.worktrees/`, with slashes in branch names flattened to dashes).
+
+### Concise Transcript View
+
+*(v1.0.85+)* Set `transcriptView` to `"concise"` in your settings to group tool activity into expandable work summaries instead of showing every tool call inline — useful for keeping long sessions readable when an agent runs many small commands.
+
+### Context Management Tools for Agents
+
+*(v1.0.85+)* New `/settings` options let you opt in to context management tools for agents and subagents, giving them more control over what stays in context during long-running tasks.
+
+### Steering Prompts and `/fork` During Active Turns
+
+*(v1.0.87+)* Consecutive steering prompts sent in the same mode now combine into a single pending message — press **Up** in an empty chat input to recall it for editing, including pasted text and attachments. **Ctrl+C** stops the running turn instead of removing queued prompts one at a time, **Ctrl+Q** keeps queued prompts separate, and **Ctrl+P** browses prompt history without withdrawing anything. You can also run `/fork` during an active turn to branch off work without waiting for it to finish. These steering improvements apply to local sessions only.
 
 ## Common Questions
 
