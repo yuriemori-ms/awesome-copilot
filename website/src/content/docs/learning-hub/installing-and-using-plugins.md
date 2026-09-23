@@ -267,6 +267,8 @@ copilot --plugin-dir /path/to/my-plugin
 
 Plugins loaded this way appear in `/plugin list` under a separate **External Plugins** section, clearly distinguished from marketplace-installed plugins. This is useful for testing local plugins in development or loading private plugins that aren't published to any marketplace.
 
+> **Agents visible in server-mode sessions (v1.0.87+)**: Agents provided by a plugin loaded with `--plugin-dir` now also appear when the CLI is running in server mode, matching their visibility in regular interactive sessions.
+
 ### Where Plugins Are Stored
 
 - **Marketplace plugins**: `~/.copilot/installed-plugins/MARKETPLACE/PLUGIN-NAME/`
