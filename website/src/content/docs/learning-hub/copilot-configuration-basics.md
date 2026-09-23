@@ -605,6 +605,8 @@ Unlike `/worktree` (which keeps the current conversation), `/new-worktree` is th
 /worktree new my-feature-branch
 ```
 
+**Customizing where worktrees are created** *(v1.0.87+)*: The `worktreePathTemplate` setting controls where `/worktree`, `/move`, `/new-worktree`, and the `--worktree` startup flag create new worktrees. Set a template such as `~/src/worktrees/{repo}/{branch}` in your config, using the placeholders `{repoPath}`, `{repo}`, `{branch}`, and `{branchSlug}`. Leaving it unset keeps the previous layout — `<repo>.worktrees/`, with slashes in branch names flattened to dashes.
+
 The `/every` command (also available as `/loop` since v1.0.64) schedules a recurring prompt to run automatically at a specified interval. The companion `/after` command runs a prompt once after a specified delay. Both are useful for self-paced automation — polling for results, periodically summarizing progress, or triggering other slash commands on a timer:
 
 ```
@@ -945,6 +947,34 @@ copilot skill enable my-skill    # enable a specific skill
 ### Command-Line Parsing Rewrite
 
 *(v1.0.84+)* Command-line parsing moved from Commander to a Rust-based grammar that mirrors what the CLI actually parses, which also generates shell completions directly from that grammar — so `copilot <TAB>` now offers root flags alongside subcommands, and each subcommand only shows its own options. As a result of this change, some error and help wording changed, `copilot login --host` now works correctly, and `--max-autopilot-continues` no longer accepts scientific notation as a value.
+
+### Recalling and Combining Steering Prompts
+
+*(v1.0.87+)* If you send several messages while the agent is mid-turn, consecutive steering prompts sent in the same mode now combine into a single pending message instead of queuing separately. Press **Up** in an empty chat input to recall that pending message for editing — including any pasted text and attachments — with a recall hint shown alongside it. **Ctrl+C** stops the running turn (rather than removing pending prompts one at a time), **Ctrl+Q** keeps queued prompts separate, and **Ctrl+P** lets you browse prompt history without withdrawing anything. This is available for local sessions; prompts or commands already being processed can't be recalled.
+
+### Auto Routing Tier Defaults
+
+*(v1.0.87+)* Administrators can now set user and managed startup defaults for the **Auto** routing tier (see [Auto mode and server-side model routing](#model-picker) above), including a strict, organization-enforced policy or a user-overridable default. This lets teams standardize on Auto mode for cost or consistency reasons while still allowing individual overrides where appropriate.
+
+### Custom Agent Reasoning Effort Timing
+
+*(v1.0.88+)* A custom agent's `reasoningEffort` frontmatter field now applies as soon as the agent is selected, rather than only once its designated model loads. An explicit `--reasoning-effort` CLI flag still takes precedence, and if the selected model doesn't support a requested level, the CLI reports this and leaves the setting unapplied instead of silently ignoring it.
+
+### Reusing Repository Instructions in Custom Agents
+
+*(v1.0.86+)* Custom agents can opt into your repository's instruction files (`AGENTS.md`, `copilot-instructions.md`, `CLAUDE.md`) by setting `include-custom-instructions: true` in their frontmatter, so an agent picks up team-wide conventions without duplicating that guidance directly in the agent file:
+
+```yaml
+---
+name: 'Code Reviewer'
+description: 'Reviews changes against repository conventions'
+include-custom-instructions: true
+---
+```
+
+### Terminal Notifications
+
+*(v1.0.88+)* The CLI can send optional OSC 777 terminal notifications when a turn finishes, for terminals that support it — currently Ghostty and WezTerm in direct (non-multiplexed) sessions. This is useful for surfacing completion of long-running turns when the terminal window isn't focused.
 
 ## Common Questions
 

@@ -202,6 +202,10 @@ This pairs with **improved workspace resolution**: agents can resolve a workspac
 
 **Shareable session links** *(VS Code 1.138+)*: Agent Host sessions and chats now provide browser-addressable links, so you can reopen or share a specific Agents window session directly from another app, a GitHub issue, or terminal output — useful when handing off a delegated subagent's work to a teammate for review. You can also start a new session beside the current one in one step, keeping the current work visible while a second session starts.
 
+**Managing large delegated-work session lists** *(VS Code 1.139+)*: When you delegate across many parallel chats, the sessions list now loads and refreshes noticeably faster — the agent host keeps lightweight session and chat metadata in a central catalog instead of opening every conversation database on each refresh, with full conversation content still isolated per session. Enable **Compact View** in the sessions list to fit more delegated sessions on screen at once; rows show just the title at rest, reveal workspace details on hover or focus, and automatically expand when a chat needs input or approval. You can also rename a session or nested chat in place (double-click the title, use the **Rename** context menu action, or a keyboard shortcut) instead of only setting a name at creation time.
+
+**Choosing how delegated chats appear** *(VS Code 1.139+, Preview)*: When a session contains multiple delegated chats, the session header menu lets you pick between **Multiple** (each chat on its own tab) and **Single** (only the active chat, tab bar hidden) presentation. Switching preserves your open chats, active chat, and conversation state, so you can reduce visual clutter for a coordinator/worker session without losing track of the delegated work underneath it.
+
 ## Common questions
 
 **Do users always invoke subagents directly?**

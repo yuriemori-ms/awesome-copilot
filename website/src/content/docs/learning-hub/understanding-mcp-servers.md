@@ -217,6 +217,12 @@ Some MCP servers require authentication to connect to protected resources. GitHu
 
 > **Client ID Metadata Document support (v1.0.83+)**: Copilot CLI can now sign in to MCP servers using a **Client ID Metadata Document (CIMD)** for OAuth, an alternative to Dynamic Client Registration where the client's identity is published as a metadata document at a URL instead of being registered ahead of time with the authorization server.
 
+> **Connector reauthorization prompts (v1.0.88+)**: If a connected service (such as a Connector powering an MCP server) needs you to re-authorize your GitHub authentication, the CLI now prompts you directly instead of failing silently — reducing time spent debugging what looks like a broken MCP server but is actually an expired authorization.
+
+### Built-in GitHub MCP Server Visibility
+
+*(v1.0.87+)* `copilot mcp list` and `copilot mcp get` now report the built-in `github-mcp-server` when you're signed in, matching what was previously only visible in the interactive `/mcp` view. This makes it easier to script or audit which MCP servers — including the built-in one — are active in a session.
+
 ## How Agents Use MCP Tools
 
 When an agent declares an MCP server in its `tools` array, Copilot can invoke that server's capabilities during conversation:

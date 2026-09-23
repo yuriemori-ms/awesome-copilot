@@ -96,6 +96,19 @@ tools: ['codebase', 'terminal', 'github']
 ---
 ```
 
+> **Applies immediately on selection (v1.0.88+)**: `reasoningEffort` now takes effect as soon as you select the agent, instead of only once its model finishes loading. An explicit `--reasoning-effort` CLI flag still wins over the agent's setting, and if the active model doesn't support the requested level, the CLI reports this instead of silently ignoring it.
+
+**include-custom-instructions** *(v1.0.86+)*: When set to `true`, the agent also loads your repository's instruction files (`AGENTS.md`, `copilot-instructions.md`, `CLAUDE.md`) alongside its own instructions — useful when you want an agent to follow team-wide conventions without copying that guidance into the agent file itself:
+
+```yaml
+---
+name: 'Code Reviewer'
+description: 'Reviews changes against repository conventions'
+include-custom-instructions: true
+tools: ['codebase', 'github']
+---
+```
+
 **tools** (recommended): An array of built-in tools and MCP servers the agent can access. Common tools include:
 
 | Tool | Purpose |
