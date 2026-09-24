@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-24
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -945,6 +945,30 @@ copilot skill enable my-skill    # enable a specific skill
 ### Command-Line Parsing Rewrite
 
 *(v1.0.84+)* Command-line parsing moved from Commander to a Rust-based grammar that mirrors what the CLI actually parses, which also generates shell completions directly from that grammar — so `copilot <TAB>` now offers root flags alongside subcommands, and each subcommand only shows its own options. As a result of this change, some error and help wording changed, `copilot login --host` now works correctly, and `--max-autopilot-continues` no longer accepts scientific notation as a value.
+
+### Concise Transcript View and Context Management Tools
+
+*(v1.0.85+)* Set `transcriptView` to `"concise"` in `/settings` to group tool activity into expandable work summaries instead of showing every tool call inline — useful for keeping long agentic sessions readable. The same release adds `/settings` options to opt in to **context management tools** for agents and subagents, giving the model explicit tools for managing its own context window rather than relying solely on automatic truncation.
+
+### Custom Worktree Path Templates
+
+*(v1.0.87+)* A `worktreePathTemplate` setting controls where `/worktree`, `/move`, `/new`, and `--worktree` create worktrees. Set it to a path template using the `{repoPath}`, `{repo}`, `{branch}`, and `{branchSlug}` placeholders — for example:
+
+```json
+{
+  "worktreePathTemplate": "~/src/worktrees/{repo}/{branch}"
+}
+```
+
+Leaving the setting unset keeps the previous default layout (`<repo>.worktrees/`, with slashes in the branch name flattened to dashes).
+
+### Recalling and Combining Steering Prompts
+
+*(v1.0.87+)* Consecutive prompts typed while the agent is already working (steering prompts) now combine into a single pending message instead of queuing separately. Press **↑** in an empty chat input to recall the pending message for editing — including any pasted text or attachments — and use **Ctrl+P** to browse prompt history without withdrawing a pending prompt. **Ctrl+C** stops the running turn instead of removing pending prompts one at a time, while **Ctrl+Q** keeps queued prompts separate. This is available for local sessions; commands and prompts already being processed can't be recalled.
+
+### Auto Routing Tier Defaults
+
+*(v1.0.87+)* Organizations can set user and managed startup defaults for the **Auto** model-routing tier, including a strict mode and a user-overridable policy, giving admins more control over which model tier sessions start in by default.
 
 ## Common Questions
 
