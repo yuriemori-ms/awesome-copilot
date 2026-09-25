@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-25
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -266,6 +266,8 @@ copilot --plugin-dir /path/to/my-plugin
 ```
 
 Plugins loaded this way appear in `/plugin list` under a separate **External Plugins** section, clearly distinguished from marketplace-installed plugins. This is useful for testing local plugins in development or loading private plugins that aren't published to any marketplace.
+
+> **Server-mode support (v1.0.87+)**: Agents from a plugin mounted with `--plugin-dir` now also appear in server-mode sessions (`copilot --server`), not just interactive terminal sessions — useful when a local or private plugin needs to be available to clients connecting over the published server session.
 
 ### Where Plugins Are Stored
 

@@ -3,7 +3,7 @@ title: 'Agents and Subagents'
 description: 'Learn how delegated subagents differ from primary agents, when to use them, and how to launch them in VS Code and Copilot CLI.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-25
 estimatedReadingTime: '9 minutes'
 tags:
   - agents
@@ -201,6 +201,10 @@ When an agent delegates work to multiple chats, VS Code's **Agents window** now 
 This pairs with **improved workspace resolution**: agents can resolve a workspace by project name (for example, "run this in the vscode workspace") in addition to absolute paths, which simplifies prompts that hand off work across multiple repositories.
 
 **Shareable session links** *(VS Code 1.138+)*: Agent Host sessions and chats now provide browser-addressable links, so you can reopen or share a specific Agents window session directly from another app, a GitHub issue, or terminal output — useful when handing off a delegated subagent's work to a teammate for review. You can also start a new session beside the current one in one step, keeping the current work visible while a second session starts.
+
+**Run agent sessions in a Dev Container** *(VS Code 1.138+, Preview)*: Enable `chat.agentHost.devContainer.enabled` to run an Agents window session inside a local folder's Dev Container instead of on your local machine. This keeps a delegated agent's environment and dependencies aligned with the project's toolchain, which is especially useful when a subagent needs a consistent, isolated setup that differs from your host machine.
+
+**Automations** *(VS Code 1.138+)*: With `chat.automations.enabled` on by default, you can define repeatable, scheduled or triggered prompts that run in the Agents window without you manually starting each one — and export or import them to share across environments or with a team. This is a useful complement to CLI-side scheduling (`/every` and `/after`, described below) when your delegation workflow lives primarily in VS Code.
 
 ## Common questions
 
