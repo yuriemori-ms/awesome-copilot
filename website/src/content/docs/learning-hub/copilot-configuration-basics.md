@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-25
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -541,6 +541,8 @@ With the sidebar open, you can see all running and backgrounded sessions in a sp
 
 **Windows 11 taskbar status** *(v1.0.83+)*: On Windows 11, running Copilot CLI sessions now appear in the taskbar with live hover status cards, so you can check on a background session's progress without switching back to its terminal window.
 
+**Confirm before dismissing a session (v1.0.88+)**: In the Sessions tab, dismissing a row now requires pressing **x** twice to confirm. A local session is permanently deleted on the second press, while a session backed by a server is only closed — its conversation is preserved on the server. The footer tells you which of the two the highlighted row will do, and rows that can't be dismissed show no **x** hint at all.
+
 The `/rewind` command opens a timeline picker that lets you roll back the conversation to any earlier point in history. You can also trigger it by pressing **double-Esc**:
 
 ```
@@ -592,6 +594,8 @@ In v1.0.66+, you can pass a task description to `/worktree` to name the branch f
 This creates a branch named from your task description and begins working on it immediately, making it easy to spin up parallel work without stopping to think of a branch name.
 
 After the command runs, the session is inside the new worktree. Use this when you want to work on a second task in parallel without stashing changes or opening a new terminal. In v1.0.64+ you can also use the experimental `--worktree` flag at startup (`copilot -w [name]`) to create or reuse a worktree under `<repo>.worktrees/` before the session begins.
+
+**Custom worktree location (v1.0.87+)**: A `worktreePathTemplate` setting controls where `/worktree`, `/move`, `/new`, and `--worktree` create worktrees. Set it to a path such as `~/src/worktrees/{repo}/{branch}` using the supported placeholders `{repoPath}`, `{repo}`, `{branch}`, and `{branchSlug}`. Leaving it unset keeps the default layout, `<repo>.worktrees/`, with slashes in the branch name flattened to dashes.
 
 The `/new-worktree` command *(v1.0.78+, experimental)* creates a new worktree and starts a **fresh conversation** in it — without inheriting the current session's history. This is useful when you want a completely clean slate for a new task in a parallel branch:
 

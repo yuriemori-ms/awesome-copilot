@@ -3,7 +3,7 @@ title: 'Understanding MCP Servers'
 description: 'Learn how Model Context Protocol servers extend GitHub Copilot with access to external tools, databases, and APIs.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-05
+lastUpdated: 2026-09-25
 estimatedReadingTime: '8 minutes'
 tags:
   - mcp
@@ -111,6 +111,10 @@ You can also install a specific server by name directly:
 ```
 
 This guided flow is the recommended way to add new MCP servers, especially for servers that require multiple configuration values.
+
+**Managing MCP servers from the CLI (v1.0.87+)**: `copilot mcp list` and `copilot mcp get` now report the built-in `github-mcp-server` when you're signed in, instead of only surfacing it in the interactive `/mcp` view. This makes it easier to confirm the built-in GitHub tools are active from scripts or a quick terminal check without opening a session.
+
+**Per-server slow-connection thresholds (v1.0.87+)**: Configure `slowConnectionThresholdMs` on an individual MCP server entry to tune how long the CLI waits before warning that a specific server is slow to connect — useful when one server (e.g., a remote server behind a proxy) is expected to take longer than the rest.
 
 ### Configuration Fields
 

@@ -3,7 +3,7 @@ title: 'Building Custom Agents'
 description: 'Learn how to create specialized GitHub Copilot agents with custom personas, tool integrations, and domain expertise.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-05
+lastUpdated: 2026-09-25
 estimatedReadingTime: '10 minutes'
 tags:
   - agents
@@ -96,6 +96,8 @@ tools: ['codebase', 'terminal', 'github']
 ---
 ```
 
+> **Applies on agent selection (v1.0.88+)**: A custom agent's `reasoning-effort` now takes effect as soon as you select the agent, instead of only when its associated model is also selected. An explicit `--reasoning-effort` flag still overrides it, and if the level the agent requests isn't offered by the current model, the CLI reports that and leaves the setting unapplied rather than silently falling back.
+
 **tools** (recommended): An array of built-in tools and MCP servers the agent can access. Common tools include:
 
 | Tool | Purpose |
@@ -107,6 +109,17 @@ tools: ['codebase', 'terminal', 'github']
 | `edit` | Modify files in the workspace |
 
 For MCP server tools, reference them by server name (e.g., `postgres`, `docker`). See [Understanding MCP Servers](../understanding-mcp-servers/) for details.
+
+> **Repository instructions opt-in (v1.0.86+)**: By default, custom agents run with only their own frontmatter and body — they don't automatically pick up repository instruction files. Set `include-custom-instructions: true` in an agent's frontmatter to have it also load `AGENTS.md`, `copilot-instructions.md`, and `CLAUDE.md` from the repository, layering your team's shared conventions on top of the agent's own persona:
+>
+> ```yaml
+> ---
+> name: 'API Design Reviewer'
+> description: 'Reviews API designs for consistency, RESTful patterns, and team conventions'
+> include-custom-instructions: true
+> tools: ['codebase', 'github']
+> ---
+> ```
 
 ### Agent Instructions
 
