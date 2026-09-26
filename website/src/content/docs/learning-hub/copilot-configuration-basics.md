@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-26
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -945,6 +945,30 @@ copilot skill enable my-skill    # enable a specific skill
 ### Command-Line Parsing Rewrite
 
 *(v1.0.84+)* Command-line parsing moved from Commander to a Rust-based grammar that mirrors what the CLI actually parses, which also generates shell completions directly from that grammar — so `copilot <TAB>` now offers root flags alongside subcommands, and each subcommand only shows its own options. As a result of this change, some error and help wording changed, `copilot login --host` now works correctly, and `--max-autopilot-continues` no longer accepts scientific notation as a value.
+
+### Recent CLI Additions (v1.0.85–v1.0.88)
+
+A few smaller but notable changes landed across recent CLI releases:
+
+- **`/settings` context management tools** *(v1.0.85+)*: Opt in to context management tools for agents and subagents directly from `/settings`, giving finer control over how much conversation history is retained versus summarized.
+- **`copilot instruction list` and `copilot lsp list`** *(v1.0.85+)*: These replace the older `copilot plugins list --kind instruction` and `--kind lsp` forms — see [Managing Plugin Components from the CLI](#managing-plugin-components-from-the-cli) above.
+- **`--json` output** *(v1.0.85+)*: Added to `copilot plugin list`, `copilot plugin marketplace list`, and `copilot plugin marketplace browse` for easier scripting.
+- **Session and memory import for the semantic JSONL format** *(v1.0.85+)*: Import previously exported session history or memory entries using the same interchange format introduced for export in v1.0.84.
+- **`/vim` available to everyone** *(v1.0.85+)*: Vim modal editing in the composer graduated from an opt-in setting to a feature everyone can turn on with `/vim` or `editorMode: vim`.
+- **`transcriptView: "concise"` setting** *(v1.0.85+)*: Groups tool activity into expandable work summaries instead of a flat scrolling transcript, making long sessions easier to scan.
+- **Custom agents can opt into repository instructions** *(v1.0.86+)*: Set `include-custom-instructions: true` in an agent's frontmatter to have it also read `AGENTS.md`, `copilot-instructions.md`, and `CLAUDE.md` from the repository — useful when you want a custom agent's persona layered on top of your team's existing conventions rather than replacing them:
+
+  ```yaml
+  ---
+  name: 'Security Reviewer'
+  include-custom-instructions: true
+  ---
+  ```
+
+- **`worktreePathTemplate` setting** *(v1.0.87+)*: Controls where `/worktree`, `/move`, `/new`, and `--worktree` create worktrees, using a template like `~/src/worktrees/{repo}/{branch}` with `{repoPath}`, `{repo}`, `{branch}`, and `{branchSlug}` placeholders. Leave it unset to keep the default `<repo>.worktrees/` layout.
+- **Auto routing startup defaults** *(v1.0.87+)*: User and managed startup defaults for the Auto model routing tier, including a strict organization policy and a user-overridable variant, let admins set a sensible default routing tier without preventing individual override where policy allows it.
+- **`reasoning-effort` applies at agent selection** *(v1.0.88+)*: A custom agent's `reasoningEffort` frontmatter value now takes effect as soon as the agent is selected, rather than only when its associated model loads. An explicit `--reasoning-effort` flag still overrides it, and if the selected model doesn't support the requested level, the CLI reports this and leaves the setting unapplied.
+- **Namespaced and ignorable custom skills** *(v1.0.88+)*: Skill discovery now supports namespacing custom skills and marking specific skill directories to be ignored, helpful when multiple plugins or teams ship skills with overlapping names.
 
 ## Common Questions
 
