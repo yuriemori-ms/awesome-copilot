@@ -3,7 +3,7 @@ title: 'Building Custom Agents'
 description: 'Learn how to create specialized GitHub Copilot agents with custom personas, tool integrations, and domain expertise.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-05
+lastUpdated: 2026-09-26
 estimatedReadingTime: '10 minutes'
 tags:
   - agents
@@ -92,6 +92,19 @@ name: 'Security Reviewer'
 description: 'Thorough security audit for OWASP vulnerabilities'
 model: Claude Sonnet 4
 reasoningEffort: high
+tools: ['codebase', 'terminal', 'github']
+---
+```
+
+> **Applies at selection, not just at model load (v1.0.88+)**: `reasoningEffort` now takes effect as soon as you select the agent, instead of only when its associated model finishes loading. An explicit `--reasoning-effort` flag on the command line still wins over the agent's frontmatter value, and if the currently selected model doesn't support the requested effort level, the CLI reports this and leaves the setting unapplied rather than silently ignoring it.
+
+**include-custom-instructions** *(v1.0.86+)*: Set this to `true` to have the agent also read the repository's existing instruction files — `AGENTS.md`, `copilot-instructions.md`, and `CLAUDE.md` — in addition to its own persona. This is useful when you want an agent's specialized behavior layered on top of your team's established conventions rather than replacing them entirely:
+
+```yaml
+---
+name: 'Security Reviewer'
+description: 'Thorough security audit for OWASP vulnerabilities'
+include-custom-instructions: true
 tools: ['codebase', 'terminal', 'github']
 ---
 ```
