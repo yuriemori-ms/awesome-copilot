@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-27
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -945,6 +945,22 @@ copilot skill enable my-skill    # enable a specific skill
 ### Command-Line Parsing Rewrite
 
 *(v1.0.84+)* Command-line parsing moved from Commander to a Rust-based grammar that mirrors what the CLI actually parses, which also generates shell completions directly from that grammar — so `copilot <TAB>` now offers root flags alongside subcommands, and each subcommand only shows its own options. As a result of this change, some error and help wording changed, `copilot login --host` now works correctly, and `--max-autopilot-continues` no longer accepts scientific notation as a value.
+
+### Worktree Path Templates
+
+*(v1.0.87+)* A `worktreePathTemplate` setting decides where `/worktree`, `/move`, `/new`, and `--worktree` create worktrees. Set it to a pattern like `~/src/worktrees/{repo}/{branch}`, using the placeholders `{repoPath}`, `{repo}`, `{branch}`, and `{branchSlug}`. Leaving it unset keeps the previous default layout — a `<repo>.worktrees/` folder, with slashes in the branch name flattened to dashes.
+
+### Auto Routing Tier Defaults
+
+*(v1.0.87+)* Organizations and users can now set startup defaults for the **Auto** model routing tier, including a strict policy that locks the tier for everyone or a user-overridable default that pre-selects Auto without preventing individuals from switching models.
+
+### Forking Mid-Turn and Reasoning Effort per Agent
+
+*(v1.0.87+/v1.0.88+)* Run `/fork` while a turn is still in progress to branch off into a new session without waiting for the current response to finish. Separately, a custom agent's `reasoningEffort` frontmatter field now applies as soon as the agent is selected, rather than only when its associated model loads — an explicit `--reasoning-effort` flag still takes priority, and CLI reports (without applying) any level the selected model doesn't support.
+
+### Repository Instructions Opt-In for Custom Agents
+
+*(v1.0.86+)* Custom agents can opt into reading repository instruction files — `AGENTS.md`, `copilot-instructions.md`, and `CLAUDE.md` — by setting `include-custom-instructions: true` in their frontmatter, letting an agent combine its own persona with your team's shared conventions. See [Building Custom Agents](../building-custom-agents/) for the full frontmatter reference.
 
 ## Common Questions
 

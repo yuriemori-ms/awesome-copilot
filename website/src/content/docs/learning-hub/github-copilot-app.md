@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-27
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -50,6 +50,10 @@ The central hub of the Copilot app is the **My Work** view. This dashboard shows
 
 Instead of checking GitHub, your CLI, and VS Code for updates, everything is in one place.
 
+**AI-generated filters** *(v1.1.23+)*: In My Work's Add filter menu, describe the results you want in plain language (for example, "PRs I opened that are waiting on review") and Copilot generates a filter you can inspect, edit, or revert before applying. My Work also supports filtering by merged date, and the All filters menu has been reorganized to make existing filter types easier to find. If AI filtering can't turn your request into filters, you can continue in a session with your original request and repository prefilled instead.
+
+**Issues and Pull requests as separate sections** *(v1.1.23+)*: My Work now splits Issues and Pull requests into separate sidebar and navigation sections, and each connected repository can be browsed as its own dedicated page — with its Issues and Pull requests views editable, reorderable, duplicable, and deletable, just like custom views in My Work.
+
 ### Automations
 
 The Copilot app includes built-in automations that can run scheduled tasks for you using the same agentic technology. You can use templates out of the box or create your own.
@@ -72,6 +76,14 @@ This makes it easy to dispatch multiple agents and trust they won't interfere wi
 
 Closing the app's main window keeps it running in the background instead of quitting, with tray (Windows/Linux) or Dock (macOS) support to bring it back. This means scheduled automations and in-progress sessions keep running even when the window isn't open.
 
+### Sandboxed Shell Commands
+
+*(v1.1.23+)* A project setting and a **`/sandbox`** command let you run the agent's shell commands in a local sandbox that restricts filesystem access to the current session's workspace, mirroring the `/sandbox` capability already available in Copilot CLI (see [Copilot Configuration Basics](../copilot-configuration-basics/)). Turn this on for projects where you want an extra containment layer around agent-run commands.
+
+### Restarting a Session's Conversation
+
+*(v1.1.23+)* The **`/restart-session`** command restarts a chat or side chat conversation while preserving its history, letting you get a clean context window without losing the record of what was discussed.
+
 ### Canvases
 
 **Canvases** are interactive work surfaces where you and agents collaborate. Instead of long chat threads, a canvas shows the actual work:
@@ -89,6 +101,8 @@ For a hands-on guide to building canvases with `/create-canvas`, see [Working wi
 - Browse **Featured** integrations (for example Azure DevOps or Figma) and install them with one click
 - See what's already **Installed**, with consistent icons and source labels across plugin, skill, MCP server, canvas, and connector types
 - Create, edit, or remove your own **personal skills** directly in the app, without hand-authoring a `SKILL.md` file
+
+*(v1.1.23+)* A featured **Sentry canvas** is now available in Customize, letting you install and open it to triage live Sentry issues directly from the app.
 
 This makes Customize a good starting point if you want to extend the app's capabilities but don't need the full `copilot plugin` CLI workflow described in [Installing and Using Plugins](../installing-and-using-plugins/).
 
