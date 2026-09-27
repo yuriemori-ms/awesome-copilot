@@ -96,6 +96,18 @@ tools: ['codebase', 'terminal', 'github']
 ---
 ```
 
+**include-custom-instructions** *(v1.0.86+)*: Set to `true` to have the agent also read your repository's instruction files — `AGENTS.md`, `copilot-instructions.md`, and `CLAUDE.md` — in addition to its own persona instructions. This is useful when you want an agent's specialized behavior to still respect team-wide conventions rather than operating in isolation:
+
+```yaml
+---
+name: 'Security Reviewer'
+description: 'Thorough security audit for OWASP vulnerabilities'
+model: Claude Sonnet 4
+include-custom-instructions: true
+tools: ['codebase', 'terminal', 'github']
+---
+```
+
 **tools** (recommended): An array of built-in tools and MCP servers the agent can access. Common tools include:
 
 | Tool | Purpose |
