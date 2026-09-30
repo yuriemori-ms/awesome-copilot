@@ -142,6 +142,10 @@ applyTo: '**'
 **Expected Result**:
 When you work on a file matching the pattern, Copilot incorporates that instruction's context into suggestions and chat responses automatically.
 
+## Claude Code Rule Files
+
+*(v1.0.89+)* Copilot CLI also loads Claude Code rule files from `.claude/rules` as custom instructions, so repositories that already keep rules there work without duplication.
+
 ## Composing Instructions with @-style Imports
 
 *(v1.0.66+)* Copilot CLI supports **@-style imports** in instruction files, AGENTS.md, and CLAUDE.md. Use a bare `@path/to/file.md` reference to embed the content of another file at that point:
