@@ -144,6 +144,8 @@ When you work on a file matching the pattern, Copilot incorporates that instruct
 
 ## Composing Instructions with @-style Imports
 
+*(v1.0.89+)* Copilot CLI also reads Claude Code rule files in `.claude/rules` as custom instructions.
+
 *(v1.0.66+)* Copilot CLI supports **@-style imports** in instruction files, AGENTS.md, and CLAUDE.md. Use a bare `@path/to/file.md` reference to embed the content of another file at that point:
 
 ```markdown
