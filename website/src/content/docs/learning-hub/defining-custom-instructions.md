@@ -64,6 +64,8 @@ applyTo: '**/*.tsx, **/*.ts'
 
 Use functional components with TypeScript interfaces for all props.
 
+> **Claude rule files (v1.0.89+)**: Copilot CLI also reads Claude Code rule files in `.claude/rules` as custom instructions, which helps when a repository is shared with Claude Code users.
+
 ## Naming Conventions
 
 - Component files: PascalCase (e.g., `UserProfile.tsx`)
