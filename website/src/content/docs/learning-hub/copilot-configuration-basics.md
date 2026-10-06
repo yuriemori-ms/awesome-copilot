@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-06
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -933,6 +933,22 @@ copilot skill enable my-skill    # enable a specific skill
 ```
 /config
 ```
+
+### The `copilot config` Subcommands
+
+*(v1.0.92+)* Manage settings from your shell without opening the CLI or hand-editing `config.json`. `copilot config` has subcommands to list, read, set, and remove settings, which is handy for scripting team onboarding or CI setup. Run `copilot config --help` to see the exact syntax for your version.
+
+### Choosing Local or Cloud Runs at Startup
+
+*(v1.0.92+)* Before you start a conversation, press **Ctrl+E** to open an environment picker and switch between running locally and running in the cloud.
+
+### Sandbox CA Commands
+
+*(v1.0.91+)* `copilot sandbox ca` commands check, create, trust, rotate, and remove the proxy certificate authority (CA) trust used by sandboxed commands, including unattended setup on Windows. The `/sandbox ca install` command was split into `create` and `trust`. In v1.0.92, these commands also respect `--config-dir`.
+
+### Scoping GitHub Auth for MCP Servers
+
+*(v1.0.90+)* Use `--mcp-github-auth` to limit your GitHub account authentication to approved MCP server origins, rather than making it available to every MCP server. In v1.0.92, sandboxed shells also withhold the ambient `GITHUB_TOKEN` unless you explicitly configure it.
 
 ### Sandbox Network Allow/Deny Rules
 
