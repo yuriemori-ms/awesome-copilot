@@ -459,6 +459,8 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, **Gemini 3.7 Flash** (v1.0.81+), **Claude Fable 5.1** (v1.0.83+), and **GPT-6 Astra** (v1.0.84+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks. The `/model picker` also periodically retires older models no longer worth recommending — a recent cleanup removed several deprecated Claude and Gemini entries (v1.0.83+), so don't be surprised if a model you previously pinned disappears from the list.
 
+**Newer model additions** *(v1.0.93+)*: The recommended list in the model picker now prioritizes **GPT-6.1 Sol**, **GPT-6 Astra/Luna**, and the **Claude 5.5** models. **Claude Haiku 5.5** was added to model selection and `--model` completions in v1.0.94.
+
 **Model fallback lists** *(v1.0.83+)*: Custom agents can set `model` to a list of several models instead of a single name. Copilot tries each one in order until it finds one available to your account — useful when your preferred model is temporarily rate-limited or not enrolled. Pair this with `model-policy: required` to keep the agent restricted to that list even if you try to switch models mid-session. See [Building Custom Agents](../building-custom-agents/) for the frontmatter syntax.
 
 **Plan mode model** *(v1.0.74+)*: When using plan mode (which blocks file mutations and keeps changes in a planning phase), you can assign a *separate* model specifically for planning — different from your regular session model. This lets you use a fast, cost-effective model for plan drafting while keeping a more capable model on standby for the implementation phase:
@@ -937,6 +939,18 @@ copilot skill enable my-skill    # enable a specific skill
 ### Sandbox Network Allow/Deny Rules
 
 *(v1.0.84+)* `/sandbox` now supports per-host network allow/deny rules that layer on top of your configured upstream proxy, instead of replacing it. This lets you permit or block specific hosts for sandboxed commands without reconfiguring your whole proxy setup — useful when a sandboxed build or test needs to reach one extra domain (like a package registry mirror) while keeping the rest of your network policy intact.
+
+### Managing Settings with `copilot config`
+
+*(v1.0.92+)* `copilot config` subcommands let you list, read, set, and remove settings from the command line, which is handy for scripting setup. As of v1.0.93, user settings are read only from `~/.copilot/settings.json`; user-setting keys left in `~/.copilot/config.json` are ignored, so move any you still rely on.
+
+### Sandbox for All Users and Enterprise Limits
+
+*(v1.0.93+)* Command sandboxing is available to all users through `/sandbox` and `--sandbox`, and local-network allowlists include localhost and loopback hosts. Enterprises can enforce managed domain boundaries for network requests with `permissions.limitTo`. In v1.0.94, managed policy can also disable Assisted Permissions and keep sessions in Manual Approval mode.
+
+### Local or Cloud Runs from the Start
+
+*(v1.0.92+)* Press **Ctrl+E** before the first message of a conversation to open an environment picker and switch between local and cloud runs. MCP server configuration changes also now apply between turns (v1.0.93+), so you no longer need to restart the session.
 
 ### Memory and Session Import
 
