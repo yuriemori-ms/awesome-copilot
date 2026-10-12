@@ -938,6 +938,25 @@ copilot skill enable my-skill    # enable a specific skill
 
 *(v1.0.84+)* `/sandbox` now supports per-host network allow/deny rules that layer on top of your configured upstream proxy, instead of replacing it. This lets you permit or block specific hosts for sandboxed commands without reconfiguring your whole proxy setup — useful when a sandboxed build or test needs to reach one extra domain (like a package registry mirror) while keeping the rest of your network policy intact.
 
+### Managing Settings with `copilot config`
+
+*(v1.0.92+)* The `copilot config` subcommands list, read, set, and remove settings from the command line, with key completion in Bash, Zsh, and Fish. As of v1.0.93, user settings are read only from `~/.copilot/settings.json`; user-setting keys left in `~/.copilot/config.json` are ignored, so move them over when upgrading. v1.0.95 adds sandbox credential `injectHosts` keys to `copilot config`.
+
+### Sandboxing Available to All Users
+
+*(v1.0.93+)* Command sandboxing is available to all users through `/sandbox` and `--sandbox`. Sandbox local-network allowlists include localhost and loopback hosts, and since v1.0.92 sandboxed shells withhold the ambient `GITHUB_TOKEN` unless you explicitly configure it.
+
+### Enterprise Managed Policy
+
+Managed settings gained several controls: `permissions.limitTo` enforces managed domain boundaries for network requests (v1.0.93+), and policy can disable Assisted Permissions and keep sessions in Manual Approval mode (v1.0.94+). The CLI also shows a warning when startup bypass-permission flags are suppressed by policy, and update guidance when managed settings request a newer CLI version.
+
+### Other Recent CLI Changes
+
+- **Ctrl+E environment picker** *(v1.0.92+)*: switch between local and cloud runs before starting a conversation.
+- **MCP changes apply between turns** *(v1.0.93+)*: MCP server configuration changes no longer need a session restart, and MCP servers can be enabled or disabled before discovery (v1.0.94+).
+- **Models**: Claude Haiku 5.5 was added in v1.0.94, and the picker's recommended list now prioritizes GPT-6.1 Sol, GPT-6 Astra/Luna, and Claude 5.5 models.
+- **Microsoft Entra** *(v1.0.95)*: native broker authentication on macOS, with browser fallback.
+
 ### Memory and Session Import
 
 *(v1.0.84+)* New session and memory import commands accept the semantic JSONL interchange format, making it possible to bring saved session history or memory entries into Copilot CLI from an external export rather than starting from scratch.
