@@ -938,6 +938,29 @@ copilot skill enable my-skill    # enable a specific skill
 
 *(v1.0.84+)* `/sandbox` now supports per-host network allow/deny rules that layer on top of your configured upstream proxy, instead of replacing it. This lets you permit or block specific hosts for sandboxed commands without reconfiguring your whole proxy setup — useful when a sandboxed build or test needs to reach one extra domain (like a package registry mirror) while keeping the rest of your network policy intact.
 
+### Managing Settings with `copilot config`
+
+*(v1.0.92+)* The `copilot config` subcommands let you list, read, set, and remove settings from the shell, which is handy for scripting and dotfile setup. Sandbox credential `injectHosts` keys are supported *(v1.0.95+)*, with key completion in Bash, Zsh, and Fish.
+
+> **Breaking change (v1.0.93+)**: User settings are read only from `~/.copilot/settings.json`. User-setting keys left in `~/.copilot/config.json` are ignored, so move them across if you hand-edited the old file.
+
+### Sandbox Updates (v1.0.92–v1.0.96)
+
+- **Available to everyone** *(v1.0.93+)*: Command sandboxing is available to all users through `/sandbox` and `--sandbox`.
+- **Safer defaults** *(v1.0.92+)*: Sandboxed shells withhold the ambient `GITHUB_TOKEN` unless you explicitly configure it.
+- **Local network** *(v1.0.93+)*: Sandbox local-network allowlists include localhost and loopback hosts.
+- **Interactive setup** *(v1.0.96+)*: The settings dialog suggests possible environment secrets and lets you add masking hosts before saving.
+- **`/add-dir`** *(v1.0.96+)* grants sandbox access to the added directories for the current session.
+- **MCP changes** *(v1.0.93+)*: MCP server configuration changes apply between turns without restarting the session.
+
+### Permissions and Managed Policy Updates
+
+- *(v1.0.93+)* Enterprise `permissions.limitTo` enforces managed domain boundaries for network requests.
+- *(v1.0.94+)* Managed policy can disable Assisted Permissions and keep sessions in Manual Approval mode. A warning appears when startup bypass-permission flags are suppressed.
+- *(v1.0.96+)* The timeline shows whether you, Assisted Permissions, policy, or an unattended fallback made each permission decision.
+- *(v1.0.92+)* Press Ctrl+E before the first prompt to switch between local and cloud runs.
+- *(v1.0.94+)* Claude Haiku 5.5 is available in model selection. *(v1.0.96+)* Model IDs in `/model` and `/config` are case-insensitive and saved in canonical form.
+
 ### Memory and Session Import
 
 *(v1.0.84+)* New session and memory import commands accept the semantic JSONL interchange format, making it possible to bring saved session history or memory entries into Copilot CLI from an external export rather than starting from scratch.
